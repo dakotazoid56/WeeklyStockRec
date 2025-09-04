@@ -1,0 +1,37 @@
+name: Run WeeklyStockRec every minute
+
+on:
+  schedule:
+    - cron: '* * * * *'  # every minute
+  workflow_dispatch:      # allows manual run
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'  # or your preferred version
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run main.py
+        env:
+          NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
+          ALPHAVANTAGE_KEY: ${{ secrets.ALPHAVANTAGE_KEY }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          TIMEZONE: America/Los_Angeles
+          MAX_HEADLINE_AGE_DAYS: 7
+          MIN_MARKET_CAP_USD: 1000000000
+          MIN_PRICE: 2
+          RUN_DAY: MON
+          RUN_HOUR_LOCAL: 8
+          RUN_MINUTE_LOCAL: 30
+        run: python main.py
