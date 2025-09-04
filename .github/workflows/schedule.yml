@@ -1,4 +1,4 @@
-name: Run WeeklyStockRec every Mon-Fri at 6 AM PT
+name: Run WeeklyStockRec every Mon-Fri at 11:35 PM PT
 
 on:
   schedule:
