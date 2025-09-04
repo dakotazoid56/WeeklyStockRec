@@ -1,8 +1,8 @@
-name: Run WeeklyStockRec every Mon-Fri at 11:35 PM PT
+name: Run WeeklyStockRec every Mon-Fri at 11:45 AM PT
 
 on:
   schedule:
-    - cron: "35 7 * * *"   # 11:35 PM PT during DST (Mar–Nov)
+    - cron: "45 6 * * *"   # 11:45 PM PT during DST (Mar–Nov)
   workflow_dispatch:      # allows manual run
 
 jobs:
